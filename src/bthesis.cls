@@ -96,6 +96,8 @@
     基幹理工学部\\
     情報理工学科
   }
+
+  \def\abstractname{概要}
   
 \else
 % define english titlepage
@@ -159,6 +161,27 @@
     School of Science and Engineering\\
     Waseda University
   }
-
+  \def\abstractname{Abstract}
 \fi
+
+\renewenvironment{abstract}
+{%
+\thispagestyle{empty}
+\begin{center}%
+\bigskip%
+\begin{minipage}{15cm}%
+\setlength{\parindent}{7mm}%
+{
+        \begin{center}%
+          \Large\bfseries \abstractname%
+        \end{center}%
+}
+}%
+{%
+\end{minipage}%
+\end{center}%
+\newpage
+}
+
+
 \endinput
