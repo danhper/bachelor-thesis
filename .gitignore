@@ -12,3 +12,7 @@
 
 # auto generated style
 auto/
+
+# latexmk
+*.fdb_latexmk
+*.fls
