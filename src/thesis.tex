@@ -1,4 +1,12 @@
-\documentclass[a4paper,imgdir=../imgs]{bthesis}
+\documentclass[a4paper,imgdir=../imgs,oneside]{bthesis}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{hyperref}
+\hypersetup{%
+  colorlinks=false,
+  urlbordercolor=blue,
+  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
+}
+
 \title{X server in web browser}
 \author{PEREZ HERNANDEZ Daniel}
 \email{tuvistavie@gmail.com}
@@ -7,8 +15,7 @@
 \diploma{Bachelor in Information and Computer Science}
 \date{\today}
 \begin{document}
-\maketitle
-\begin{abstract}
-  \input{abstract}
-\end{abstract}
+%
+\input{frontmatter}
+%
 \end{document}

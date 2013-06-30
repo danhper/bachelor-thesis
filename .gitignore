@@ -5,6 +5,7 @@
 *.pdf
 *.lot
 *.lof
+*.out
 
 # Logs
 *.log

@@ -4,6 +4,7 @@
 \RequirePackage{graphicx}
 \RequirePackage{tabularx}
 \RequirePackage{kvoptions}
+\RequirePackage{indentfirst}
 
 
 \DeclareBoolOption{japanese}
@@ -12,30 +13,39 @@
 
 % pass left options to parent documentclass
 \ifbthesis@japanese
-  \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{jreport}}
+  \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{jbook}}
 \else
-  \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{report}}
+  \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{book}}
 \fi
 
 \ProcessKeyvalOptions*
 
 % load parent class
 \ifbthesis@japanese
-  \LoadClass{jreport}
+  \LoadClass{jbook}
 \else
-  \LoadClass{report}
+  \LoadClass{book}
+  \RequirePackage{fontspec}
+  \RequirePackage{microtype}
 \fi
 
+\RequirePackage[a4paper,top=3cm,left=3cm,right=3cm]{geometry}
+
+\RequirePackage{titlesec}
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{0pt}{40pt}
+
 % override layout
-\topmargin=-0.2cm
-\headheight=0cm
-\headsep=0cm
-\footskip=0cm
-\oddsidemargin=-0.04cm
-\evensidemargin=-0.04cm
-\textheight=24.7cm
-\textwidth=16.5cm
-\footskip=1.5cm
+% \topmargin=-0.2cm
+% \headheight=0cm
+% \headsep=0cm
+% \footskip=0cm
+% \oddsidemargin=-0.04cm
+% \evensidemargin=-0.04cm
+% \textheight=24.7cm
+% \textwidth=16.5cm
+% \footskip=1.5cm
 
 \def\row#1{%
   \hbox to \hsize{%
@@ -130,10 +140,11 @@
       \setlength{\baselineskip}{38pt}
       \thispagestyle{empty}\vbox to \vsize{%
         \vfill
-        \vspace{3cm}
         \row{\Huge \@title}
-        \vspace{4cm}
+        \vspace{2.5cm}
         \row{\huge\@author}
+        \vspace{-0.5cm}
+        \row{\Large \@email}
         \vspace{2cm}
         \info{}
         \vspace{1cm}
@@ -152,7 +163,7 @@
     \def\author#1{\def\@author{#1}}
     \def\title#1{\def\@title{#1}}
     \def\institute#1{\def\@institute{#1}}
-    \def\email#1{\def\@email{#1}}
+    \def\email#1{\def\@email{\texttt{<#1>}}}
     \def\studentnb#1{\def\@studentnb{#1}}
     \def\supervisor#1{\def\@supervisor{#1}}
     \def\diploma#1{\def\@diploma{#1}}
@@ -165,12 +176,10 @@
   }
   \def\abstractname{Abstract}
 \fi
-
-\renewenvironment{abstract}
+\newenvironment{abstract}
 {%
 \thispagestyle{empty}
 \begin{center}%
-\bigskip%
 \begin{minipage}[t]{15cm}%
 \setlength{\baselineskip}{18.5pt}
 \setlength{\parindent}{7mm}%
@@ -185,5 +194,5 @@
 \end{center}%
 \newpage
 }
-
 \endinput
+
