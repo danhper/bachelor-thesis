@@ -1,0 +1,13 @@
+# TeX generated files
+*.aux
+*.dvi
+*.toc
+*.pdf
+*.lot
+*.lof
+
+# Logs
+*.log
+
+# auto generated style
+auto/
