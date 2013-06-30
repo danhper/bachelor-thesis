@@ -29,23 +29,21 @@
   \RequirePackage{microtype}
 \fi
 
+\def\@makechapterhead#1{%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \huge\bfseries \@chapapp\space \thechapter
+        \par\nobreak
+        \vskip 20\p@
+      \fi
+    \fi
+    \interlinepenalty\@M
+    \Huge \bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}
+
 \RequirePackage[a4paper,top=3cm,left=3cm,right=3cm]{geometry}
-
-\RequirePackage{titlesec}
-\titleformat{\chapter}[display]
-{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
-\titlespacing*{\chapter}{0pt}{0pt}{40pt}
-
-% override layout
-% \topmargin=-0.2cm
-% \headheight=0cm
-% \headsep=0cm
-% \footskip=0cm
-% \oddsidemargin=-0.04cm
-% \evensidemargin=-0.04cm
-% \textheight=24.7cm
-% \textwidth=16.5cm
-% \footskip=1.5cm
 
 \def\row#1{%
   \hbox to \hsize{%
@@ -71,16 +69,22 @@
       {\huge 卒業論文}
     }
 
+    \def\institute{
+      \@university\\
+      \@school\\
+      \@department
+    }
+
     \def\maketitle{%
       \setlength{\baselineskip}{38pt}
-      \thispagestyle{empty}
+      \thispagestyle{empty}\vbox to \vsize{%
         \vfill
         \header
         \vspace{3cm}
         \row{\Huge \@title}
 
-        \vspace{5cm}
-        \row{\@institute}
+        \vspace{3cm}
+        \row{\institute}
         \vspace{3mm}
         \row{\LARGE \@author}
         \vspace{1cm}
@@ -88,6 +92,7 @@
         \tablerow{提出}{\@date}
         \tablerow{指導教授}{\@supervisor}
         \vfill
+      }
       \cleardoublepage
       \setlength{\baselineskip}{18.5pt}
     }
@@ -95,18 +100,18 @@
     \def\date#1{\def\@date{#1}}
     \def\author#1{\def\@author{#1}}
     \def\title#1{\def\@title{#1}}
-    \def\institute#1{\def\@institute{#1}}
     \def\email#1{\def\@email{#1}}
     \def\studentnb#1{\def\@studentnb{#1}}
     \def\supervisor#1{\def\@supervisor{#1}}
     \def\diploma#1{\def\@diploma{#1}}
+    \def\university#1{\def\@university{#1}}
+    \def\school#1{\def\@school{#1}}
+    \def\department#1{\def\@department{#1}}
   \makeatother
 
-  \institute{%
-    早稲田大学\\
-    基幹理工学部\\
-    情報理工学科
-  }
+  \university{早稲田大学}
+  \school{基幹理工学部}
+  \department{情報理工学科}
 
   \def\abstractname{概要}
   
@@ -125,15 +130,22 @@
     \def\footer{
       \begin{tabularx}{15cm}{rr}
 	\begin{minipage}[c]{0.6\linewidth}
-          \setlength{\baselineskip}{20pt}
           \begin{flushright}
-            {\Large \@institute}
+            {\Large \institute}
           \end{flushright}
 	\end{minipage} &
-	\begin{minipage}[c]{0.4\linewidth}
+	\begin{minipage}[c]{0.35\linewidth}
           \includegraphics[scale=0.6]{\bthesis@imgdir/waseda_logo_bw.eps}
 	\end{minipage}
       \end{tabularx}
+    }
+
+    \def\institute{
+      \@department\\
+      \vspace{3mm}
+      \@school\\
+      \vspace{4mm}
+      \@university
     }
 
     \def\maketitle{%
@@ -162,18 +174,19 @@
     \def\date#1{\def\@date{#1}}
     \def\author#1{\def\@author{#1}}
     \def\title#1{\def\@title{#1}}
-    \def\institute#1{\def\@institute{#1}}
     \def\email#1{\def\@email{\texttt{<#1>}}}
     \def\studentnb#1{\def\@studentnb{#1}}
     \def\supervisor#1{\def\@supervisor{#1}}
     \def\diploma#1{\def\@diploma{#1}}
+    \def\university#1{\def\@university{#1}}
+    \def\school#1{\def\@school{#1}}
+    \def\department#1{\def\@department{#1}}
   \makeatother
-  
-  \institute{%
-    Department of Computer Science\\
-    School of Science and Engineering\\
-    Waseda University
-  }
+
+  \university{Waseda University}
+  \school{School of Science and Engineering}
+  \department{Department of Computer Science}
+
   \def\abstractname{Abstract}
 \fi
 \newenvironment{abstract}
