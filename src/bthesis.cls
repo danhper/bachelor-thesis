@@ -79,6 +79,7 @@
         \tablerow{指導教授}{\@supervisor}
         \vfill
       \cleardoublepage
+      \setlength{\baselineskip}{18.5pt}
     }
     
     \def\date#1{\def\@date{#1}}
@@ -144,6 +145,7 @@
         \vfill
       }%
       \cleardoublepage
+      \setlength{\baselineskip}{18.5pt}
     }
     
     \def\date#1{\def\@date{#1}}
@@ -169,7 +171,8 @@
 \thispagestyle{empty}
 \begin{center}%
 \bigskip%
-\begin{minipage}{15cm}%
+\begin{minipage}[t]{15cm}%
+\setlength{\baselineskip}{18.5pt}
 \setlength{\parindent}{7mm}%
 {
         \begin{center}%
@@ -182,6 +185,5 @@
 \end{center}%
 \newpage
 }
-
 
 \endinput
