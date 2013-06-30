@@ -1,9 +1,19 @@
-.PHONY: thesis.pdf
+VIEWER=evince
 
-all: thesis.pdf
+INPUT=thesis.tex
 
-thesis.pdf: thesis.tex
-	latexmk -pdf -xelatex -use-make thesis.tex
+OUTPUT=thesis.pdf
+
+.PHONY: $(OUTPUT)
+
+all: $(OUTPUT)
+
+thesis.pdf: $(OUTPUT)
+	latexmk -pdf -xelatex -use-make $(INPUT)
 
 clean:
 	latexmk -CA
+	find . -name *.aux -or -name *.log -delete
+
+view:
+	$(VIEWER) $(OUTPUT) &
