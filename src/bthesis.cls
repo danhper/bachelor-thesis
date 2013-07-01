@@ -29,6 +29,8 @@
   \RequirePackage{microtype}
 \fi
 
+\setcounter{tocdepth}{1}
+
 \def\@makechapterhead#1{%
   {\parindent \z@ \raggedright \normalfont
     \ifnum \c@secnumdepth >\m@ne
