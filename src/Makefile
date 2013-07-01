@@ -8,7 +8,7 @@ OUTPUT=thesis.pdf
 
 all: $(OUTPUT)
 
-thesis.pdf: $(OUTPUT)
+$(OUTPUT): 
 	latexmk -pdf -xelatex -use-make $(INPUT)
 
 clean:
