@@ -1,0 +1,30 @@
+\section{General overview}
+We will here be giving a general overview of the project.
+
+The project is mainly divided in three different parts, 
+\begin{description}
+\item[Server backend]
+  This application main role is to communicate with the X clients, 
+  to transfer the requests sent by the X clients to the frontend fo the system, 
+  and to transfer back the replies and events sent by the frontend to the 
+  X clients. 
+  
+  Another important role of this application is to store as possible 
+  the information held by the client and the frontend in order to, whenever 
+  possible avoid unneeded communication by responding directly without 
+  needing to transfer any information.
+
+  To illustrate this caching system, let us think about a requests sent by a 
+  client to get the background and foreground pixels of a particular 
+  subwindow (the root window information being sent on connection). If the 
+  backend server was doing any cache work, the request would have to be 
+  sent to the frontend application, and then to the client web browser, before 
+  getting an answer, which would result in a, depending on the bandwith, 
+  quite long latency for a very basic request.   
+  
+\item[Server frontend]
+\item[Client frontend]
+\end{description}
+
+
+

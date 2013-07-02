@@ -209,5 +209,8 @@
 \end{center}%
 \newpage
 }
+
+\setcounter{chapter}{1}
+
 \endinput
 
