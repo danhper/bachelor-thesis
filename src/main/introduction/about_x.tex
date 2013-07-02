@@ -24,6 +24,13 @@ the server and the clients. Those types are
   for many different reasons. One of the main reason for errors generated 
   from the server side is for access to non available resources.
 \end{description}
+An overview of how these messages are sent is shown in figure \ref{fig:xcore-overview}.
+\begin{figure}[tb]
+  \begin{center}
+    \includegraphics[height=8cm,width=6cm]{../imgs/xcore-overview.png}
+    \caption{\label{fig:xcore-overview}Overview of the X communication protocol}
+  \end{center}
+\end{figure}
 \subsection{Resources}
 The protocol uses a number of different resources which we will shortly 
 introduce here.
@@ -37,5 +44,8 @@ introduce here.
 \item[Pixmap] A pixmap is a region used to draw, but on opposite to a window, 
   it is not shown until explicitly requested. The content of a pixmap 
   or part of it can be displayed on a window.
-
+\item[Graphic context] A graphic context is a structure containing basic graphic 
+  information to apply to a given request, for example the background and 
+  foreground colors, or a transformation to apply to the shape to draw.
+\subsection{Short example}
 \end{description}
