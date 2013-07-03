@@ -1,4 +1,15 @@
 \section{Differences from X}
 In this section, we will discuss between the main differences of this project 
-with a normal X server architecture.
+with a normal X server.
+\subsection{Communication through websockets}
+A first major difference is that to implement this system, we need 
+not only to communicate with X clients using a bytestream such as 
+TCP sockets, but we also need to use some communication protocol to 
+communicate with a web browser. The chosen protocol to achieve this is 
+websockets, we will be discussing further about this decision later in 
+this paper.
+\subsection{Integrated login manager}
+This project goes further from a normal X server in the sense that the 
+login manager is integrated and therefore does not depends on the 
+X Display Manager Control Protocol.
 
