@@ -23,7 +23,22 @@ The project is mainly divided in three different parts,
   quite long latency for a very basic request.   
   
 \item[Server frontend]
-\item[Client frontend]
+  One of the roles of this application  is to act as a bridge to
+  communicate between the backend application of the system 
+  and the web browser JavaScript application.
+
+  Another of its role is to act as a login manager. The application 
+  receives an HTTP request with the client Linux/UNIX creditentials 
+  check those creditentials, and on success, initializes the server 
+  backend for the particular client as well as the websocket connection 
+  to communicate with the web browser.
+\item[Web browser application]
+  The web browser application is the application running in the client 
+  browser, and has several responsibilities in the system.
+
+  The first responsibility of this application is to handle the 
+  requests received from the server and to render them in the web 
+  browser.
 \end{description}
 
 
