@@ -6,7 +6,6 @@
 \RequirePackage{kvoptions}
 \RequirePackage{indentfirst}
 
-
 \DeclareBoolOption{japanese}
 \DeclareStringOption[.]{imgdir}
 \ProcessKeyvalOptions*
@@ -28,6 +27,8 @@
   \RequirePackage{fontspec}
   \RequirePackage{microtype}
 \fi
+
+\RequirePackage[bottom]{footmisc}
 
 \setcounter{tocdepth}{1}
 
