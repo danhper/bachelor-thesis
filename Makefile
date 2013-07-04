@@ -14,6 +14,7 @@ $(OUTPUT):
 clean:
 	latexmk -CA
 	find . -name *.aux -or -name *.log -delete
+	rm *.bbl
 
 view:
 	$(VIEWER) $(OUTPUT) &

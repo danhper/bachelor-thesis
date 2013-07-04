@@ -1,14 +1,14 @@
-\section{About X protocol}
+\chapter{About X protocol}
 The whole application is using the X protocol
 \footnote{\url{http://www.x.org/docs/XProtocol/proto.pdf}}, 
 we are therefore going to give a brief presentation of this protocol, 
 for the reader to be able to understand the concepts in this paper.
-\subsection{Generalities}
+\section{Generalities}
 The X protocol is a network-transparent protocol for bitmap display. 
 It uses a client-server architecture, running the server on the computer 
 with the display, and makes the connection with local and remote clients possible. 
 It is a binary protocol and can be built on top of any reliable byte stream (eg. TCP).
-\subsection{Messages}
+\section{Messages}
 The protocol uses four main types of messages to communicate between 
 the server and the clients. Those types are
 \begin{description}
@@ -32,7 +32,7 @@ An overview of how these messages are sent is shown in figure~\ref{fig:xcore-ove
     \caption{\label{fig:xcore-overview}Overview of the X protocol \protect\footnotemark}
   \end{center}
 \end{figure}
-\subsection{Resources}
+\section{Resources}
 The protocol uses a number of different resources which we will shortly 
 introduce here.
 \begin{description}
@@ -49,7 +49,7 @@ introduce here.
   information to apply to a given request, for example the background and 
   foreground colors, or a transformation to apply to the shape to draw.
 \footnotetext{Diagram from Wikipedia \href{http://en.wikipedia.org/wiki/X_Window_System_core_protocol}{X Window System Core Protocol}}
-\subsection{Short example}
+\section{Example}
 To end up with the presentation of the X protocol, we will here give a
 short example of a communication between an X server and an X client.
 \end{description}

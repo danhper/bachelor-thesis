@@ -6,6 +6,8 @@
 *.lot
 *.lof
 *.out
+*.bbl
+*.blg
 
 # Logs
 *.log
