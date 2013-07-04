@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+  system/.style={draw,rectangle,rounded corners=3,minimum width=2cm,text width=1.8cm,text centered},
+  node distance=2cm
+  ]
+  \draw (-7, -2.5) rectangle + (10,3.5);
+  \draw (-6, -3) node  {Remote computer};
+  
+  \draw (-1.5, -6.3) rectangle + (3,1.5);
+  \draw (2.8, -4.5) node {Local machine};
+
+  \node[system] (sf) {Server front app};
+  \node[system, below=4.8cm of sf] (fe) {Front end};
+  \node[system, left=3.5cm of sf] (sb) {Server back app};
+  \node[system, below=1cm of sb] (xc) {X client};
+
+  \draw[style={->,>=triangle 45}] 
+  ($(sb.east)+(0,-0.3)$) -- 
+  ($(sf.west)+(0,-0.3)$)
+  node [midway, below] {Transfer requests};
+  
+  \draw[style={->,>=triangle 45}] 
+  ($(sf.west)+(0,0.3)$) --
+  ($(sb.east)+(0,0.3)$)
+  node [midway, above] {Transfer data};
+
+  \draw[style={->,>=triangle 45}]
+  ($(sb.south)+(-0.4,0)$) -- 
+  ($(xc.north)+(-0.4,0)$);
+  
+  \draw[style={->,>=triangle 45}] 
+  ($(xc.north)+(0.4,0)$) -- 
+  ($(sb.south)+(0.4,0)$);
+
+  \draw[style={->,>=triangle 45}]
+  ($(fe.north)+(-0.5,0)$)--
+  ($(sf.south)+(-0.5,0)$)
+  node [midway, left, align=right] {Replies\\Events};
+  
+  \draw[style={->,>=triangle 45}] 
+  ($(sf.south)+(0.5,0)$) --
+  ($(fe.north)+(0.5,0)$)
+  node [midway, right, align=left] {Requests};
+\end{tikzpicture}

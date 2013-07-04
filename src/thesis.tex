@@ -1,12 +1,5 @@
 \documentclass[a4paper,11pt,imgdir=../imgs,oneside]{bthesis}
-
-\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
-\usepackage{hyperref}
-\hypersetup{%
-  colorlinks=false,
-  urlbordercolor=blue,
-  pdfborderstyle={/S/U/W 1}% border style will be underline of width 1pt
-}
+\include{setup}
 \title{X server in web browser}
 \author{PEREZ HERNANDEZ Daniel}
 \email{tuvistavie@gmail.com}
@@ -16,11 +9,11 @@
 \date{\today}
 \begin{document}
 %
-\frontmatter
+\frontmatter{}
 %
 \include{front/main}
 %
-\mainmatter
+\mainmatter{}
 \include{introduction/main}
 %
 \include{general_architecture/main}
