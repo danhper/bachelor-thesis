@@ -25,6 +25,7 @@ as the reason for rejecting the connection.
 %
 If the connection is accepted, the server sends back a message with the necessary server and 
 screen information.
+%
 \subsection{Requests}
 The \lstinline{XOpenDisplay} function actually offers some abstraction for the end user and
 does not only initialize the connection but also query for extensions, and setup a basic 
@@ -40,3 +41,38 @@ asynchronously.
 The next request to be sent is the request to create a default graphic context. 
 The created graphic context is the one that will be used when the client uses the 
 \lstinline{DefaultGC (Display*, int)} function.
+
+The client then creates a window, using the information received during the connection 
+initialization, such as the root window and the black and white pixels information. This 
+generate a \lstinline{CreateWindow} request which does not need a reply, the client therefore 
+sends the next request straight away. 
+
+\lstinline{XSelectInput} is used to select the kind of events the client is listening. 
+This is important to avoid receiving events that will never be hanlded. However, this request does 
+not exist in the X protocol and \lstinline{ChangeWindowAttributes} request with the 
+\lstinline{event-mask} set with the proper value is sent instead.
+
+Finally, a \lstinline{MapWindow} request is sent to map the created window on the screen.
+%
+\subsection{Events}
+The program works around a simple event loop, in which only two kinds of events are 
+handled: the \lstinline{Expose} and \lstinline{KeyPress} events. 
+The \lstinline{XNextEvent} is a function that blocks the execution of the program 
+until an event is received from the server, and set the event when received.
+
+The first received event should be the \lstinline{Expose} event, which is generated when
+a window is shown on the screen, so that should be generated if the \lstinline{MapWindow} request 
+was handled properly.
+
+The other handled event is the \lstinline{Keypress} event, which is generated whenever 
+a key is pressed on the keyboard the server is listening. In this example, 
+the \lstinline{Keypress} event is not really handled, in the sense that neither the keycode nor 
+the keysims are checked and the program simply breaks from the event loop, but the event does 
+contain all the necessary information in order to properly handle it, and those information 
+are usually indeed checked in a real world application.
+%
+\subsection{Closing the display}
+As the client creates a number of resources while running, here a graphic context and a window, 
+those needs to be destroyed when the client program ends. The \lstinline{XCloseDisplay} is 
+a high-level function that takes care to send the appropriate \lstinline{DestroyWindow} and 
+\lstinline{FreeGC} requests to the server in order for the resources to be freed properly.
