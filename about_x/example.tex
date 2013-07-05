@@ -2,8 +2,41 @@
 To end up with the presentation of the X protocol, we will here give a
 short example of a communication between an X server and an X client. 
 In this example, we will explain what happens at the protocol level 
-when the following code is ran.
+when the following code, using Xlib\footnote{Xlib is a library to implement client
+application using the X protocol. It takes care of all the low-level details of the 
+protocol, such as byte-swapping, or choosing ids for allocated resources.}, is ran.
 %
 \lstinputlisting[basicstyle=\footnotesize, 
-     caption=Simple example of an X application]{about_x/x_test.c}
+     caption=Simple example of an X application,stepnumber=2]{about_x/x_test.c}
 %
+\subsection{Connection setup}
+On line $14$, the client tries to open the screen $0$ of display number $2$
+for the X server running on \lstinline{localhost}. In the X window system, for TCP connections,
+like in this case, the display number $0$ should be listening on the port $6000$, and 
+other display should increase the port number by $1$. Therefeore, the display number $2$ is 
+supposed to be listening port $6002$. If no connection can be established to this host and port, 
+the program fails. If the connection is established, the client send connection information to 
+the server. The client first specifies the byte-order (LSBF or MSBF), then the major and 
+minor version number of the used X protocol, and finally if needed, authorization protocol 
+name and data.
+%
+If the connection is rejected, the server sends back a message indicating this, as well 
+as the reason for rejecting the connection.
+%
+If the connection is accepted, the server sends back a message with the necessary server and 
+screen information.
+\subsection{Requests}
+The \lstinline{XOpenDisplay} function actually offers some abstraction for the end user and
+does not only initialize the connection but also query for extensions, and setup a basic 
+graphic context. 
+
+The first request to be sent is a \lstinline{QueryExtension} request, querying for the 
+\lstinline{BigRequest}\footnote{The \lstinline{BigRequest} extension is 
+  an extension to allow requests of more than the 262140 bytes.} extension. The client then blocks 
+until receiving a reply from the server. This is however not decided by the protocol itself, 
+and depending on the request and reply involved, the client may choose to send the request 
+asynchronously.
+
+The next request to be sent is the request to create a default graphic context. 
+The created graphic context is the one that will be used when the client uses the 
+\lstinline{DefaultGC (Display*, int)} function.
