@@ -1,0 +1,18 @@
+\section{Resources}
+The protocol uses a number of different resources which we will shortly 
+introduce here.
+\begin{description}
+\item[Drawable] A drawable is an abstract entity used to draw. It can be a window or a pixmap.
+\item[Window] There are two types of window: top-level window and subwindows. 
+  A top-level window is the main container for an application and 
+  usually contains all the other components of the application.
+  A subwindow is a window contained in the top-level window of an application 
+  and can be used for anything, from the titlebar to a button in the application.
+\item[Pixmap] A pixmap is a region used to draw, but on opposite to a window, 
+  it is not shown until explicitly requested. The content of a pixmap 
+  or part of it can be displayed on a window.
+\item[Graphic context] A graphic context is a structure containing basic graphic 
+  information to apply to a given request, for example the background and 
+  foreground colors, or a transformation to apply to the shape to draw.
+\footnotetext{Diagram from Wikipedia \href{http://en.wikipedia.org/wiki/X_Window_System_core_protocol}{X Window System Core Protocol}}
+\end{description}
