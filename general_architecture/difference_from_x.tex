@@ -1,6 +1,15 @@
 \section{Differences with a normal X server}
 In this section, we will discuss between the main differences of this project 
 with a normal X server.
+\subsection{Divided server}
+In a normal X client/server architecture, the client connects to the server, 
+and communicates directly with it. The X server needs to have control over the 
+keyboard, mouse, screen, and other hardware used to display graphics, and handle events.
+
+This system is very different as first of all, there is not really \emph{an} X server.
+Given the system requirements, the application that communicate with the client and the 
+application that listens 
+
 \subsection{Communication through websockets}
 A first major difference is that to implement this system, we need 
 not only to communicate with X clients using a bytestream such as 
