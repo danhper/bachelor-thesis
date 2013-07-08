@@ -1,2 +1,16 @@
 \chapter{Server frontend application}
 %
+The server frontend is the part of the application that ensures 
+the communication between the backend and the web browser is done 
+properly. It communicates through TCP sockets with the backend
+and through web sockets with the web browser.
+
+It also has the important role of login manager. On a client connection, 
+it first checks the login and password of the user, and launches a new 
+backend instance for the user is the connection is accepted.
+
+In this chapter, we will give more detailed explanation of how this 
+application works, the different pitfalls when implementing it, and 
+some possibles improvements.
+%
+\input{server_frontend/general_explanations}

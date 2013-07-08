@@ -1,0 +1,36 @@
+\section{General explanations}
+% 
+This application is, as explained above, a server web application used to 
+communicate with the web browser. However, the application really has two 
+roles, which are very different from each other. We will here give a brief 
+description of how these two roles are handled by the application.
+
+During the login phase, the application just acts as a normal web 
+application. The client sends its creditentials through an HTTP request,
+with some additional information, such as the size of the web browser 
+window. The application checks the creditentials of the client, and 
+just sends back an error in case they did not match the UNIX/Linux 
+creditentials. If the creditentials were correct, two actions happen 
+simultanously. 
+\begin{itemize}
+\item The application launches a process of the backend 
+  application with the user id of the user connecting.
+  
+  When the backend application initializes, it sends a message to 
+  the application to register itself, sending a unique identifier 
+  in order for both application to communicate together. 
+
+  This process usually ends up a little faster than the websocket connection and 
+  the first messages received from the backend application are queued until 
+  the websocket connection is opened. This choice have been made over waiting 
+\item It also sends the JS application for the web browser through the HTTP 
+  response with a secret token to authenticate the client. 
+  
+  When the web browser receives this response, it initializes a websocket 
+  connection with the application, sending the secret token with it. 
+
+  The application checks for the authenticity of the token, and when the 
+\end{itemize}
+
+
+
