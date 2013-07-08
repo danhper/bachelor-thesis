@@ -7,18 +7,21 @@ and communicates directly with it. The X server needs to have control over the
 keyboard, mouse, screen, and other hardware used to display graphics, and handle events.
 
 This system is very different as first of all, there is not really \emph{an} X server.
-Given the system requirements, the application that communicate with the client and the 
-application that listens 
-
+Given the system requirements, the application that communicates with the client and the 
+application that listens to the events cannot be the same; handling all the TCP 
+directly in the web browser is not realistic. There is therefore a need 
+to communicate with clients, and make communication possible with the application 
+acting as the X server frontend.
+%
 \subsection{Communication through websockets}
-A first major difference is that to implement this system, we need 
-not only to communicate with X clients using a bytestream such as 
-TCP sockets, but we also need to use some communication protocol to 
+As a consequence of the above difference, another difference is that to 
+implement this system, we need not only to communicate with X clients using 
+a bytestream such as TCP sockets, but we also need to use some communication protocol to 
 communicate with a web browser. The chosen protocol to achieve this is 
 websockets, we will be discussing further about this decision later in 
 this paper.
+%
 \subsection{Integrated login manager}
 This project goes further from a normal X server in the sense that the 
 login manager is integrated and therefore does not depends on the 
 X Display Manager Control Protocol.
-
