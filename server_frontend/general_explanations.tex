@@ -5,6 +5,10 @@ communicate with the web browser. However, the application really has two
 roles, which are very different from each other. We will here give a brief 
 description of how these two roles are handled by the application.
 
+A global overview of the execution of the program seen from the frontend 
+application can be found in figure~\ref{fig:frontend-sequence-diag}.
+\input{server_frontend/sequence_diagram}
+
 During the login phase, the application just acts as a normal web 
 application. The client sends its creditentials through an HTTP request,
 with some additional information, such as the size of the web browser 
@@ -31,6 +35,3 @@ simultanously.
 
   The application checks for the authenticity of the token, and when the 
 \end{itemize}
-
-
-

@@ -1,0 +1,25 @@
+\begin{figure}[tb]
+  \centering
+  \begin{sequencediagram}
+    \newinst{wb}{:Web browser}
+    \newinst[2]{fe}{:FrontendApp}
+    \newinst[2]{be}{:BackendApp}
+    \begin{call}{wb}{/login}{fe}{}
+    \end{call}
+    \begin{call}{wb}{/doLogin}{fe}{index}
+      \begin{callself}{fe}{check auth}{}
+      \end{callself}
+      \mess{fe}{launch}{be}
+    \end{call}
+    \mess{be}{register}{fe}
+    \begin{call}{wb}{open ws channel}{fe}{}
+    \end{call}
+    \begin{sdblock}{Main loop}{}
+      \mess{be}{transfer request}{fe}
+      \mess{fe}{transfer request}{wb}
+      \mess{wb}{send events/replies}{fe}
+      \mess{fe}{transfer events/replies}{be}
+    \end{sdblock}
+  \end{sequencediagram}
+  \caption{\label{fig:frontend-sequence-diag}System initialization and execution}
+\end{figure}
