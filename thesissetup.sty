@@ -1,0 +1,88 @@
+\NeedsTeXFormat{LaTeX2e}[2011/06/27]
+\ProvidesPackage{thesissetup}[2013/07/08 v0.01 LaTeX package to setup thesis]
+
+\DeclareBoolOption{print}
+\DeclareStringOption[FreeMono]{monofont}
+\DeclareStringOption[FreeMono]{ttfamily}
+\DeclareStringOption[DejaVu Serif]{rmfamily}
+\ProcessKeyvalOptions*
+
+% color setup
+\ifthesissetup@print
+  \RequirePackage[usenames,dvipsnames,svgnames,table,monochrome]{xcolor}
+\else
+  \RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
+  \definecolor{lightgray}{RGB}{235,235,235}
+\fi
+%
+% links setup
+\ifthesissetup@print
+  \RequirePackage[hidelinks]{hyperref}
+\else
+  \RequirePackage{hyperref}
+  \hypersetup{%
+    colorlinks=false,
+    urlbordercolor=blue,
+    pdfborderstyle={/S/U/W 1} % border style will be underline of width 1pt
+  }
+\fi
+
+%
+%
+% tikz setup
+%
+\RequirePackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\RequirePackage[underline=true]{pgf-umlsd}
+%
+%
+% listings setup
+%
+\RequirePackage{listings}
+\RequirePackage{courier}
+\setmonofont{\thesissetup@monofont}
+\newfontfamily{\myttfamily}[Scale=MatchLowercase]{\thesissetup@ttfamily}
+\newfontfamily{\myrmfamily}[Scale=MatchLowercase]{\thesissetup@rmfamily}
+\lstset{%
+  language=C,
+  basicstyle=\myttfamily,
+  numbers=left,               
+  numberstyle=\tiny,
+  numbersep=5pt,             
+  stepnumber=5,
+  numberblanklines=false,
+  tabsize=2,
+  extendedchars=true,
+  breaklines=true,        
+  frame=single,
+  frameround=tttt,
+  showspaces=false,
+  showtabs=false, 
+  xleftmargin=17pt,
+  framexleftmargin=17pt,
+  framexrightmargin=5pt,
+  framexbottommargin=4pt,
+  showstringspaces=false,
+  captionpos=b,
+}
+
+\ifthesissetup@print
+\lstset{%
+  keywordstyle=[1]\myttfamily\bfseries,
+  keywordstyle=[4]\myttfamily\mdseries,
+  stringstyle=\myrmfamily,
+  commentstyle=\myrmfamily,
+}
+\else
+\lstset{%
+  keywordstyle=[1]\color{RoyalPurple}\myttfamily\bfseries,
+  keywordstyle=[2]\color{Fuchsia}\myttfamily,   
+  keywordstyle=[3]\color{RoyalBlue}\myttfamily, 
+  keywordstyle=[4]\myttfamily\mdseries,
+  stringstyle=\color{Bittersweet}\myrmfamily,
+  commentstyle=\color{Brown}\myrmfamily,
+  backgroundcolor=\color{lightgray},
+}
+\fi
