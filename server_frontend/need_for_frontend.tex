@@ -1,0 +1,26 @@
+\section{Need for the frontend}
+Given the above expalanations about the frontend application, one could 
+think that the communication could be directly be done between the 
+server backend and the web browser, which is partly true. We will therefore
+briefly discuss about the need for this application.
+%
+\subsection{Security concerns}
+The most important reason of this application to be is basic security concerns. 
+The main point being
+\begin{itemize}
+\item If the backend application and the web browser were communicating directly, 
+  as what user should the backend application be ran?   
+\end{itemize}
+which is a question with probably not any answer. If only a single user was to 
+use the system, the application could be ran as this user, which depending on the 
+port the application is running on, could be done without having to change any privilege.
+However, this is no longer a valid approach when several users want to use the application 
+at the same time. In this case, the application could be running as a special user 
+created specially for that purpose, but in this case, for the user to be able to access 
+their home, this user should be allowed to access it too, which clearly is not reasonable.
+
+The best solution to solve this problem was therefore to create a kind of dispatcher application, 
+which act as a frontend, and starts the backend application in a new process as the given user 
+for each connection. Using this method, the only requirement for the frontend is to have a
+way to check the password authentication and to start a new process as this user. We will 
+discuss about this in the next section.
