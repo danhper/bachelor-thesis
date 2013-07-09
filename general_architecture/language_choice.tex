@@ -8,7 +8,14 @@ for rendering using Canvas.
 
 The application running on the server has been almost entirely developed in Scala. 
 In this section, we will try to discuss objectively about 
-the motivations for choosing this language.
+the motivations for choosing this language. Some of the arguments given 
+are based not only on Scala but also on the library Akka which integrates 
+very well with the design and syntax of Scala.
+
+In the following paragraphs, we will only give some quite abstract arguments, 
+to avoid entering in too many details. A more detailed presentation 
+of the actor model and its integration in Scala can be found 
+in the appendix~\ref{chap:actor-model}.
 %
 \subsection{Multi-threading}
 The system is developed to of course support several X client connections 
@@ -17,7 +24,7 @@ This therefore requires a fairly high amount of threads.
 
 Multithreading is often the source of numerous mistakes when used naively 
 using libraries such as pthread for C and C++, or \lstinline{java.lang.Thread} 
-when for Java. One of the main reason for this is that it is quite difficult to 
+for Java. One of the main reason for this is that it is quite difficult to 
 efficiently keep trace of the threads accessing a given resource, 
 and this can sometimes lead to deadlocks, starvations, or other undesired 
 effects.
@@ -25,4 +32,26 @@ effects.
 To overcome this problem, Scala makes extensive use of the actor model, where 
 basically only a single actor (thread) ever accesses the resource and 
 the other actors query this actor by sending messages, and eventually waiting 
-for responses from it.
+for responses from it. An actor assures to treat only a single message 
+at a time, and to treat messages in order they arrive. If a message 
+arrives while the actor is treating another message, this message will 
+be queued, and treated afterwards. By using this model, access to a 
+resource can be controled very easily.
+
+Of course, Scala is not the only language using the actor model. To 
+give an example between others, Erlang uses this communication system 
+extensively. Furthermore, the library used in this program, Akka, is
+also available for Java, however the impossibility of writing DSL like 
+code in Java due to the inexitance of operator overloading makes the 
+general syntax less consise and harder to read.
+%
+\subsection{Inter-process communication}
+This system uses a lot IPC to communicate between the backend and frontend
+applications on the server. How easy this communication is made was 
+also an important criteria in the choice of the language and library.
+
+Based on the above model, inter-process is made very easy, 
+using the same model over a TCP connection. The Akka library allows a 
+great abstraction for the programmer, and while IPC would 
+generally require to manually serialize data, and make
+ some other verification  can be done in a completely transparent fashion.
