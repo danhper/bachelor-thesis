@@ -2,19 +2,26 @@ VIEWER=evince
 
 INPUT=thesis.tex
 
-OUTPUT=thesis.pdf
+OUTPUT=thesis
 
-.PHONY: $(OUTPUT)
+PRINT=thesis_print
 
-all: $(OUTPUT)
+.PHONY: $(OUTPUT) $(PRINT)
 
-$(OUTPUT): 
-	latexmk -pdf -xelatex -use-make $(INPUT)
+all: 
+	latexmk -pdf -xelatex -jobname=$(OUTPUT) -use-make $(INPUT)
+
+print: 
+	latexmk -pdf -dvi- -jobname=$(PRINT) -pdflatex="xelatex %O '\def\printthesis{}\input{%S}'" $(INPUT)
 
 clean:
-	latexmk -CA
+	latexmk -CA -jobname=$(OUTPUT)
+	latexmk -CA -jobname=$(PRINT)
 	find . -name *.aux -or -name *.log -delete
 	rm *.bbl
 
 view:
-	$(VIEWER) $(OUTPUT) &
+	$(VIEWER) $(OUTPUT).pdf &
+
+view-print:
+	$(VIEWER) $(PRINT).pdf &

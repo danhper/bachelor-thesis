@@ -1,5 +1,9 @@
 \documentclass[a4paper,11pt,imgdir=imgs,oneside]{bthesis}
-\usepackage{thesissetup}
+\ifdefined\printthesis
+  \usepackage[print]{thesissetup}
+\else
+  \usepackage{thesissetup}
+\fi
 \title{X server in web browser}
 \author{PEREZ HERNANDEZ Daniel}
 \email{tuvistavie@gmail.com}
