@@ -3,12 +3,26 @@
 The web browser application is written in JavaScript, and we made the 
 choice to avoid any DOM libraries that could potentially slow down the application.
 The application however does use KineticJS\footnote{\url{http://www.kineticjs.com/}}
-for rendering.
+for rendering using Canvas.
 %
+
 The application running on the server has been almost entirely developed in Scala. 
-In this section, we will try to discuss objectively a little about 
+In this section, we will try to discuss objectively about 
 the motivations for choosing this language.
 %
 \subsection{Multi-threading}
+The system is developed to of course support several X client connections 
+for a single user, but also to accept several user at the same time.
+This therefore requires a fairly high amount of threads.
 
+Multithreading is often the source of numerous mistakes when used naively 
+using libraries such as pthread for C and C++, or \lstinline{java.lang.Thread} 
+when for Java. One of the main reason for this is that it is quite difficult to 
+efficiently keep trace of the threads accessing a given resource, 
+and this can sometimes lead to deadlocks, starvations, or other undesired 
+effects.
 
+To overcome this problem, Scala makes extensive use of the actor model, where 
+basically only a single actor (thread) ever accesses the resource and 
+the other actors query this actor by sending messages, and eventually waiting 
+for responses from it.
