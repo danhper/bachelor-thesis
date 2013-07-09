@@ -10,12 +10,12 @@ application can be found in figure~\ref{fig:frontend-sequence-diag}.
 \input{server_frontend/sequence_diagram}
 
 During the login phase, the application just acts as a normal web 
-application. The client sends its creditentials through an HTTP request,
+application. The client sends its credentials through an HTTP request,
 with some additional information, such as the size of the web browser 
-window. The application checks the creditentials of the client, and 
+window. The application checks the credentials of the client, and 
 just sends back an error in case they did not match the UNIX/Linux 
-creditentials. If the creditentials were correct, two actions happen 
-simultanously. 
+credentials. If the credentials were correct, two actions happen 
+simultaneously. 
 \begin{itemize}
 \item The application launches a process of the backend 
   application with the user id of the user connecting.
@@ -34,7 +34,7 @@ simultanously.
   connection with the application, sending the secret token with it. 
 
   The application checks for the authenticity of the token, and if the token is valid, 
-  the application accepts the websocket connection and starts transfering the messages 
+  the application accepts the websocket connection and starts transferring the messages 
   that have been queued while waiting for the websocket connection to open.
 \end{itemize}
 
