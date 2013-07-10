@@ -33,3 +33,9 @@ When a request is received, the information given by the request, if any, is cac
 by the application, and the request is handled locally when possible, otherwise 
 transferred to the frontend application. We will discuss about this further in the next 
 section.
+
+To handle requests sent by the X clients, the application first parses the requests and 
+transforms it in a normal Scala object. It then checks if the requests needs to be handled 
+locally, if the content of the requests needs to be cached, and finally if the request 
+needs to be transferred to the frontend and sends it to the frontend through a TCP connection 
+when needed.

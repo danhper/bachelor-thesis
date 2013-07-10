@@ -1,0 +1,34 @@
+\section{Caching}
+%
+As said in the previous section, an important responsibility of the backend application is to
+cache data received by both the X clients and the frontend application, and to use this cache 
+efficiently to try to reduce the most possible the requests and replies transfers to the 
+frontend application.
+
+The caching system has not yet been implemented in the system when writing this paper, but the 
+strategy to use is straightforward and should not be too difficult to implement.
+
+The first step is to check if the requests content needs to be cached or not. 
+As the requests are implemented as Scala case classes, we could easily add a trait 
+to the requests that need to be cached. A possible example of this implementation is shown 
+in listing \ref{list:caching}.
+
+\begin{lstlisting}[basicstyle=\footnotesize,caption=Possible implementation of requests needing cached,language=scala,label=list:caching]
+// define trait for caching
+trait NeedsCaching {
+  def cacheRequest: Unit
+}
+
+// mixin trait to class needing to be cached
+case class CreateWindowRequest (
+...
+) extends Request 
+  with NeedsTransfer // needs to be transfered to the frontend
+  with NeedsCaching { // needs to be cached 
+  ...
+  def cacheRequest {
+    // do cache logic
+  }
+}
+\end{lstlisting}
+
