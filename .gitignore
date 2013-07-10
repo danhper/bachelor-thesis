@@ -8,6 +8,9 @@
 *.out
 *.bbl
 *.blg
+*.idx
+*.ilg
+*.ind
 
 # Logs
 *.log
