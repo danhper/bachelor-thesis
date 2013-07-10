@@ -1,0 +1,29 @@
+\section{General explanations}
+%
+We will here describe the general working of the backend application.
+
+The application is launched asynchronously from the frontend application, 
+therefore, when starting up the backend application first sends a message to 
+the frontend to let it know that the application is now started and ready to 
+receive and transfer messages. This is a single-way communication and the 
+application does not wait for any answer from the frontend.
+
+The second step when starting up the backend is to start listening on the 
+port the \windex[X clients]{X!X client} will be connecting to. The hostname 
+to listen is statically set using a configuration file, however as the port 
+to listen to changes depending on the current screen number, the port number to 
+use to listen for incoming connection is sent as a command-line argument of the 
+application. Typically, the first application to start will be given the 
+screen number $0$, and will therefore be listening on the port $6000$ 
+(see~\ref{ssec:connection-setup}).
+
+Finally, the application reads the initialization file of the current user 
+to start launching applications (eg. a window manager or desktop environment). 
+This file should be placed in the user home directory, and is called 
+\lstinline{.scalaxsrc}, however we plan to use the file \lstinline{.xinitrc} to 
+try to imitate the behavior of \lstinline{startx}
+\footnote{\href{http://linux.die.net/man/1/startx}{\lstinline{startx}} is a script used to start the X Window System.}
+or SLiM
+\footnote{\href{http://slim.berlios.de/}{SLiM (Simple Login Manager)} is a graphical login manager for X.}.
+
+

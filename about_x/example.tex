@@ -10,6 +10,7 @@ protocol, such as byte-swapping, or choosing ids for allocated resources.}, is r
      caption=Simple example of an X application,stepnumber=2]{about_x/x_test.c}
 %
 \subsection{Connection setup}
+\label{ssec:connection-setup}
 On line $14$, the client tries to open the screen $0$ of display number $2$
 for the X server running on \lstinline{localhost}. In the X window system, for TCP connections,
 like in this case, the display number $0$ should be listening on the port $6000$, and 

@@ -1,2 +1,14 @@
 \chapter{Server backend application}
 %
+The server backend is the part of the system that communicates directly with the X clients, 
+and takes care to transfer the necessary requests to the frontend application, as well as 
+transferring back the replies and events sent from the frontend.
+
+Another important point about this application is that it caches the information received 
+from the X client and back from the frontend application, and using this cache tries to
+handle requests coming from the X client locally, without transferring them when not needed.
+
+We will here discuss about how this application is designed and implemented.
+%
+\input{server_backend/general_explanations}
+%
