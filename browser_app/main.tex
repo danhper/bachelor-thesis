@@ -4,12 +4,30 @@ The web browser application is the interface through which the user connects to 
 and then controls it. It receives messages from the server frontend application and renders them 
 on the browser screen. It also handles the browser's events and transfer them to frontend
 application.
-
 %
 \section{Rendering}
 %
 As mentioned above, the first role of the application is to render the requests received from 
 the frontend application, and therefore indirectly from the X client running for the user's 
-X session.
-
-
+X session. Listing~\ref{list:sample-request} shows a sample request that is received 
+through the websocket channel and rendered by the application.
+\begin{lstlisting}[basicstyle=\footnotesize,caption=Sample request,language=javascript,label=list:sample-request]
+{
+  "type":"request",
+  "content": {
+    "clientId": 1,
+    "opCode": 70,
+    "action": "PolyFillRectangleRequest",
+    "request": {
+      "drawable": 4194305,
+      "context": 4194304,
+      "rectangles": [{"x":20,"y":20,"width":200,"height":200}]
+    }
+  }
+}
+\end{lstlisting}
+The object contained in the \lstinline{request} key is almost exactly the request 
+sent by the X client to the backend application, translated in JSON, except from the 
+op-code being stored in the wrapping object to make the request easier to handle.
+The rest of the message is extra meta information to help the browser handling 
+requests efficiently. 
