@@ -2,3 +2,11 @@
 As explained previously, one of the main role of the frontend application is to act 
 as a login manager. That is, to check for the user credentials and to start a 
 \emph{session} for the user when these are correct.
+
+A large difference with a normal web application is that the sessions used 
+in this are completely volatile and only saved on memory, as the only 
+information needed in the frontend application is the user name and token to 
+authenticate it. Furthermore, once the connection is closed, these information 
+can be deleted safely and therefore do not need permanent storage.
+
+
