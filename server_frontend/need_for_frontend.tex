@@ -24,3 +24,14 @@ which act as a frontend, and starts the backend application in a new process as 
 for each connection. Using this method, the only requirement for the frontend is to have a
 way to check the password authentication and to start a new process as this user. We will 
 discuss about this in the next section.
+%
+\subsection{Distributed system}
+Another motivation for adding a frontend is that by letting it act as a dispatcher 
+of the backend application, adapting the system for it to run on several remote computers
+should be greatly simplified. 
+
+With the current system design, the frontend application and the backend application have no need 
+to be running on the same machine, and the frontend could therefore act not only as a dispatcher 
+to launch different process on the active machine, but also as a dispatcher to run the processes 
+on a different machine, on the same local area network, for example. As the communications 
+between the frontend and backend are already done through \index{TCP}, 
