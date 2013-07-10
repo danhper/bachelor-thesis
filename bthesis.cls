@@ -214,13 +214,5 @@
 \newpage
 }
 
-\newcommand\windex[2][]{%
-    \ifx&#1&%
-      #2\index{#2}%
-    \else%
-      #1\index{#2}%
-    \fi%
-}
-
 \endinput
 
