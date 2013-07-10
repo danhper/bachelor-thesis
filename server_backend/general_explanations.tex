@@ -26,4 +26,10 @@ try to imitate the behavior of \lstinline{startx}
 or SLiM
 \footnote{\href{http://slim.berlios.de/}{SLiM (Simple Login Manager)} is a graphical login manager for X.}.
 
+Once the application have finished initializing, it should received the first requests 
+from X clients launched when reading the initialization file.
 
+When a request is received, the information given by the request, if any, is cached 
+by the application, and the request is handled locally when possible, otherwise 
+transferred to the frontend application. We will discuss about this further in the next 
+section.
