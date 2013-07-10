@@ -13,22 +13,36 @@ As the requests are implemented as Scala case classes, we could easily add a tra
 to the requests that need to be cached. A possible example of this implementation is shown 
 in listing \ref{list:caching}.
 
-\begin{lstlisting}[basicstyle=\footnotesize,caption=Possible implementation of requests needing cached,language=scala,label=list:caching]
-// define trait for caching
-trait NeedsCaching {
-  def cacheRequest: Unit
+\begin{lstlisting}[basicstyle=\footnotesize,caption=Possible implementation of requests needing cache,language=scala,label=list:caching]
+trait NeedsCaching { // define trait for caching
+  def cacheRequest(): Unit
 }
 
-// mixin trait to class needing to be cached
+// mixin traits to class needing to be cached
 case class CreateWindowRequest (
-...
+ ...
 ) extends Request 
   with NeedsTransfer // needs to be transfered to the frontend
   with NeedsCaching { // needs to be cached 
   ...
-  def cacheRequest {
-    // do cache logic
+  def cacheRequest() {
+    // do caching logic
   }
 }
-\end{lstlisting}
 
+// handle requests needing caching
+request match {
+  case r: NeedsCaching => r.cacheRequest()
+  ...
+}
+\end{lstlisting}
+Of course, the listing above is quite minimalist, but this should be enough to check if requests need 
+caching and handle them. 
+
+The content of the \lstinline{cacheRequest} method being too different 
+for each request, we will not enter in the possible implementation details here, but at least 
+for the different resources, the idea would be to save them as an appropriate model instance 
+after checking that the resource id is valid.
+
+Using this method, the errors of access to unavailable could be done in the backend application 
+without any need to transfer the request further.
