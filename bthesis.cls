@@ -28,7 +28,7 @@
   \RequirePackage{microtype}
 \fi
 
-\RequirePackage[bottom]{footmisc}
+\RequirePackage[bottom,hang]{footmisc}
 
 \setcounter{tocdepth}{1}
 
@@ -47,6 +47,7 @@
   }}
 
 \RequirePackage[a4paper,top=3cm,left=3cm,right=3cm]{geometry}
+\interfootnotelinepenalty=10000
 
 \def\row#1{%
   \hbox to \hsize{%

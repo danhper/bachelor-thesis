@@ -1,12 +1,39 @@
-\subsection{Login manager}
+\section{Login manager}
 As explained previously, one of the main role of the frontend application is to act 
 as a login manager. That is, to check for the user credentials and to start a 
 \emph{session} for the user when these are correct.
 
-A large difference with a normal web application is that the sessions used 
+A large difference with a normal web application is that the information used 
 in this are completely volatile and only saved on memory, as the only 
-information needed in the frontend application is the user name and token to 
+needed ones in the frontend application are the user name and token to 
 authenticate it. Furthermore, once the connection is closed, these information 
 can be deleted safely and therefore do not need permanent storage.
 
+When the user connects, the user name and password are sent through a normal 
+HTTP request. The credentials are then checked using a small program written 
+in C++\footnote{\href{https://github.com/tuvistavie/nix-password-checker}{nix-password-checker} 
+  is a very small program to check a password (on UNIX/Linux systems) by reading
+  the \lstinline{/etc/passwd} and the \lstinline{/etc/shadow} files.}, which 
+simply returns an error code if the password was not correct or the user not found, 
+or $0$ when everything went fine. The calling application can therefore get sufficient 
+information just by checking the exit code of the program.
 
+The weakness of this approach is that when checking the password, the application needs to be 
+ran as root, and for obvious security reason, it is better to avoid having an application with 
+open ports running as root when possible. 
+
+When writing this paper, the feature has not been integrated in the application, and 
+the frontend application needs to be ran root, however, we will soon be re-factoring 
+the system to take the following approach.
+
+\begin{enumerate}
+\item Create an authentication server to check the credentials.
+\item Set the authentication server to accept only connections from the frontend application.
+\item Send a request from the frontend application to the authentication server 
+  to check for the credentials.
+\item Launch or not the backend application or not depending on the answer from the 
+  authentication server.
+\end{enumerate}
+
+By using the above process, it is possible for the frontend application to be ran as a non-root
+user, and to have a total control on the authentication server running as a root.
