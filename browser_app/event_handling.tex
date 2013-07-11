@@ -7,5 +7,13 @@ approach that will be taken to implement it.
 The event that are to be handled by the X server are decided by the X client, 
 and are different for each window.
 
-The windows are created as KineticJS groups, and 
+The windows are created as KineticJS groups. The framework allows each node to have 
+its own event logic, and groups being node, it is possible to assign all the 
+events that JavaScript allow to a particular window. Therefore, when a window 
+is set to react to some events, an event handler aware of the window resource id 
+could be added, sending the event to the frontend application when triggered.
 
+However, for events such as mouse motions, which trigger with a very high frequency, 
+the events could be queued and sent when no event is triggered during an arbitrary
+period or when more than an arbitrary number of events have already been. This could 
+help saving bandwidth and improving the general performances of the application.
