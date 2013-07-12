@@ -9,7 +9,8 @@ needed ones in the frontend application are the user name and token to
 authenticate it. Furthermore, once the connection is closed, these information 
 can be deleted safely and therefore do not need permanent storage.
 
-When the user connects, the user name and password are sent through a normal 
+% Why does the web application encrypt user password?
+When the user connects to the frontend application, the user name and password are sent through a normal 
 HTTP request. The credentials are then checked using a small program written 
 in C++\footnote{\href{https://github.com/tuvistavie/nix-password-checker}{nix-password-checker} 
   is a very small program to check a password (on UNIX/Linux systems) by reading
@@ -25,6 +26,7 @@ open ports running as root when possible.
 When writing this paper, the feature has not been integrated in the application, and 
 the frontend application needs to be ran root, however, we will soon be re-factoring 
 the system to take the following approach.
+% I think you can use PAM to check the authentication.
 
 \begin{enumerate}
 \item Create an authentication server to check the credentials.

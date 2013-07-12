@@ -1,12 +1,16 @@
 \section{Language and tool choice}
 %
+% I cannot understand the meaning of below sentences.
+% You do not use DOM libraries.
+% However (?) you use KineticJS.
+% I think you should explain why you use KineticJS and what are features of KineticJS.
 The web browser application is written in JavaScript, and we made the 
 choice to avoid any DOM libraries that could potentially slow down the application.
 The application however does use KineticJS\footnote{\url{http://www.kineticjs.com/}}
 for rendering using Canvas.
 %
 
-The application running on the server has been almost entirely developed in Scala. 
+The application running on the server has been almost entirely developed in Scala. % What does 'the server' indicate?
 In this section, we will try to discuss objectively about 
 the motivations for choosing this language. Some of the arguments given 
 are based not only on Scala but also on the library Akka which integrates 
@@ -28,6 +32,7 @@ for Java. One of the main reason for this is that it is quite difficult to
 efficiently keep trace of the threads accessing a given resource, 
 and this can sometimes lead to deadlocks, starvations, or other undesired 
 effects.
+% I recommend to add some references.
 
 To overcome this problem, Scala makes extensive use of the actor model, where 
 basically only a single actor (thread) ever accesses the resource and 
@@ -46,8 +51,8 @@ code in Java due to the inexitance of operator overloading makes the
 general syntax less consise and harder to read.
 %
 \subsection{Inter-process communication}
-This system uses a lot IPC to communicate between the backend and frontend
-applications on the server. How easy this communication is made was 
+This system uses a lot of Inter-process communication(IPC) to communicate between the backend and frontend
+applications on the server machine. How easy this communication is made was 
 also an important criteria in the choice of the language and library.
 
 Based on the above model, inter-process is made very easy, 
