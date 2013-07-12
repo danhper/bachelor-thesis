@@ -6,9 +6,8 @@ and then explain how it works.
 \subsection{Motivations}
 %
 The first motivation for the actor model is too make multi-threading simpler and safer.
-To give an overview of the problem to be solved, in listing \ref{list:pthread-example}
-we are going to take a short example written in C++ using the pthread 
-library for threading.
+To give an overview of the problem, in listing~\ref{list:pthread-example}
+we are going to take a short example written in C++ using the pthread library for threading.
 %
 \begin{lstlisting}[basicstyle=\footnotesize,caption=Threading example in C++,language=C++,label=list:pthread-example]
 bool resource_manager::get_resource(int id, resource& r)
@@ -31,8 +30,50 @@ if(!manager->get_resource(wanted_id, wanted_resource)) {
 In the above example, the application will deadlock as soon as the \lstinline{wanted_id}
 is not available in the resource manager, as the lock is not released in that case.
 
-Of course, in a simple example like this, any programmer having a little experience 
+Of course, in a simple example like above, any programmer having a little experience 
 with threads would notice immediately that the lock is not released and it would 
-probably would not take too long to debug anyway. However, everything is not always 
-so simple, and as timing plays an important role when working with threads, 
-deadlocks can be very difficult to debug.
+probably would not take too long to debug anyway as the deadlock occurs each time the 
+wanted id does not exist. 
+However, everything is not always so simple, and as timing plays an important 
+role when working with threads, deadlocks can be very difficult to debug.
+
+An important motivation for using the actor model is to give an extra layer of 
+abstraction to avoid this kind of problem.
+%
+\subsection{Workflow with actors}
+When working with actors, the basic rule is that actor communicate 
+with each others only using messages, and the actors' data should (almost) never be 
+used and even less modified directly.
+
+The main reason for this rule is that messages are treated sequentially by the 
+actor, which is enough to avoid having to lock the data each time we try to use it, 
+with the only condition being to respect the above rule.
+
+We will give a short example of the above example in using the akka library in Scala.
+%
+\begin{lstlisting}[basicstyle=\footnotesize,caption=Threading using actors,label=list:actor-example,language=scala]
+class ResourceManager extends Actor {
+  private var resources: Map[Int, Resource] = Map.empty
+  def receive = {
+    case ResourceRequest(resId) => resources.get(resId) match { 
+      case None => sender ! NotFound
+      case Some(resource) => sender ! ResourceReply(resource)
+    }
+    ...
+  }
+  ...
+}
+\end{lstlisting}
+Each time an actor receives a message, the \lstinline{receive} method is executed, 
+the common pattern is therefore to match the different messages that could possibly 
+received and to handle it.
+
+In the above example, when an other actor requests a resource, the \lstinline{ResourceManager} 
+actor checks if the resource exists, if it does it returns the resource to the sender 
+wrapped in a \lstinline{ResourceReply} object to help the receiver handling the 
+response more easily, otherwise it returns a \lstinline{NotFound} object.
+
+The reason why no lock is needed here is, as explained above, that messages are treated 
+sequentially and that actor resources are only accessed through messages, therefore 
+two threads will never be accessing the same resource at the same time, which 
+simplifies a lot synchronization.
