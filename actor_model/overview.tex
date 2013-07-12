@@ -1,0 +1,38 @@
+\section{Overview}
+%
+First of all, we are going to briefly explain why and how can this model be useful, 
+and then explain how it works.
+%
+\subsection{Motivations}
+%
+The first motivation for the actor model is too make multi-threading simpler and safer.
+To give an overview of the problem to be solved, in listing \ref{list:pthread-example}
+we are going to take a short example written in C++ using the pthread 
+library for threading.
+%
+\begin{lstlisting}[basicstyle=\footnotesize,caption=Threading example in C++,language=C++,label=list:pthread-example]
+bool resource_manager::get_resource(int id, resource& r)
+{
+  pthread_mutex_lock(&this->_resource_lock);
+  if(!this->has_resource(id)) {
+    return false;
+  }
+  r = this->_resource[id];
+  pthread_mutex_unlock(&this->_resource_lock);
+  return true;
+}
+
+// in some other method
+if(!manager->get_resource(wanted_id, wanted_resource)) {
+  // if wanted id not available get fallback instead
+  manager->get_resource(fallback_id, wanted_resource);
+}
+\end{lstlisting}
+In the above example, the application will deadlock as soon as the \lstinline{wanted_id}
+is not available in the resource manager, as the lock is not released in that case.
+
+Of course, in a simple example like this, any programmer having a little experience 
+with threads would notice immediately that the lock is not released and it would 
+probably would not take too long to debug anyway. However, everything is not always 
+so simple, and as timing plays an important role when working with threads, 
+deadlocks can be very difficult to debug.
