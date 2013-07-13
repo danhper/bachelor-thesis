@@ -1,7 +1,8 @@
 \section{General explanations}
 %
-We will here describe the general working of the backend application.
+We will here describe the general working of the backend application. % This sentece may be verbosity.
 
+% I recommend that below sentence is divided into multiple sentences.
 The application is launched asynchronously from the frontend application, 
 therefore, when starting up the backend application first sends a message to 
 the frontend to let it know that the application is now started and ready to 
@@ -16,6 +17,7 @@ use to listen for incoming connection is sent as a command-line argument of the
 application. Typically, the first application to start will be given the 
 screen number $0$, and will therefore be listening on the port $6000$ 
 (see~\ref{ssec:connection-setup}).
+% What port number is assigned to Second and Third request?
 
 Finally, the application reads the initialization file of the current user 
 to start launching applications (eg. a window manager or desktop environment). 
