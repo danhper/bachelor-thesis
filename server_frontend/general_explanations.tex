@@ -21,12 +21,13 @@ simultaneously.
   application with the user id of the user connecting.
 %  
   When the backend application initializes, it sends a message to 
-  the web application to register itself, sending a unique identifier 
+  the frontend application to register itself, sending a unique identifier 
   in order for both application to communicate together. 
 %
   This process usually ends up a little faster than the websocket connection and 
   the first messages received from the backend application are queued until 
-  the websocket connection is opened. This choice have been made over waiting %Are you writing now?
+  the websocket connection is opened. This choice have been made over waiting 
+  for the websocket to initialize, in order to improve the connection speed.
 \item It also sends the JS application for the web browser through the HTTP 
   response with a secret token to authenticate the client. 
 %  
