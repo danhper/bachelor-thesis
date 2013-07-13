@@ -5,12 +5,15 @@
 % However (?) you use KineticJS.
 % I think you should explain why you use KineticJS and what are features of KineticJS.
 The web browser application is written in JavaScript, and we made the 
-choice to avoid any DOM libraries that could potentially slow down the application.
-The application however does use KineticJS\footnote{\url{http://www.kineticjs.com/}}
-for rendering using Canvas.
+choice to avoid any DOM libraries that could potentially slow down the 
+application and would not be very useful in this context as 
+the application is almost only using Canvas.
+
+For rendering Canvas, the application uses KineticJS\footnote{\url{http://www.kineticjs.com/}}. 
+KineticJS is a Canvas library that allows layering and easy event handling.
 %
 
-The application running on the server has been almost entirely developed in Scala. % What does 'the server' indicate?
+The application running on the remote server has been almost entirely developed in Scala. 
 In this section, we will try to discuss objectively about 
 the motivations for choosing this language. Some of the arguments given 
 are based not only on Scala but also on the library Akka which integrates 
@@ -31,8 +34,7 @@ using libraries such as pthread for C and C++, or \lstinline{java.lang.Thread}
 for Java. One of the main reason for this is that it is quite difficult to 
 efficiently keep trace of the threads accessing a given resource, 
 and this can sometimes lead to deadlocks, starvations, or other undesired 
-effects.
-% I recommend to add some references.
+effects\cite{multithread}.
 
 To overcome this problem, Scala makes extensive use of the actor model, where 
 basically only a single actor (thread) ever accesses the resource and 
