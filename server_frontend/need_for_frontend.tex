@@ -37,9 +37,7 @@ on different machines, on the same local area network, for example. As the commu
 between the frontend and backend are already done through TCP, this part of this 
 application would work without any change, except for the hostname configuration.
 
-% Below is my comment.
-% I think that the web application and the backend application can connect directly,
-% after login process.
-% If the login informaion is valid, the login manager tells the port number, 
-% which the backend application is waiting, to the web application.
-% The web application can establish the connection to the backend application using the port.
+However, in future versions, we might allow the backend application itself to listen for 
+websocket connections after the frontend application has ended up the login process. 
+This would allow the web application to connect directly to the backend application 
+and could probably reduce the latency.
