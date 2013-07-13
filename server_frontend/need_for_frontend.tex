@@ -9,10 +9,10 @@ The most important reason of this application to be is basic security concerns.
 The main point being
 \begin{itemize}
 \item If the backend application and the web browser were communicating directly, 
-  as what user should the backend application be ran?   
+  as what user should the backend application be run?   
 \end{itemize}
 which is a question with probably not any answer. If only a single user was to 
-use the system, the application could be ran as this user, which depending on the 
+use the system, the application could be run as this user, which depending on the 
 port the application is running on, could be done without having to change any privilege.
 However, this is no longer a valid approach when several users want to use the application 
 at the same time. In this case, the application could be running as a special user 
@@ -36,3 +36,10 @@ to launch different process on the active machine, but also as a dispatcher to r
 on different machines, on the same local area network, for example. As the communications 
 between the frontend and backend are already done through TCP, this part of this 
 application would work without any change, except for the hostname configuration.
+
+% Below is my comment.
+% I think that the web application and the backend application can connect directly,
+% after login process.
+% If the login informaion is valid, the login manager tells the port number, 
+% which the backend application is waiting, to the web application.
+% The web application can establish the connection to the backend application using the port.

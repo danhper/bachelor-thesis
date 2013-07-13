@@ -12,15 +12,18 @@ communication pattern is shown in figure~\ref{fig:project-overview}.
 \begin{description}
 \item[Server backend]
   This application main role is to communicate with the X clients, 
-  to transfer the requests sent by the X clients to the frontend fo the system, 
+  to transfer the requests sent by the X clients to the frontend of the system, 
   and to transfer back the replies and events sent by the frontend to the 
   X clients. 
-  
+%  
+  % This sentence is little complex. You can explain more simply.
   Another important role of this application is to store as possible 
   the information held by the client and the frontend in order to, whenever 
   possible avoid unneeded communication by responding directly without 
   needing to transfer any information.
-
+%
+  % Below sentences also may be able to be more simply.
+  % Especially, second sentence includes multiple sentences using ','.
   To illustrate this caching system, let us think about a requests sent by a 
   client to get the background and foreground pixels of a particular 
   subwindow (the root window information being sent on connection). If the 
@@ -33,7 +36,7 @@ communication pattern is shown in figure~\ref{fig:project-overview}.
   One of the roles of this application  is to act as a bridge to
   communicate between the backend application of the system 
   and the web browser JavaScript application.
-
+%
   Another of its role is to act as a login manager. The application 
   receives an HTTP request with the client Linux/UNIX creditentials 
   check those creditentials, and on success, initializes the server 
@@ -42,11 +45,11 @@ communication pattern is shown in figure~\ref{fig:project-overview}.
 \item[Web browser application]
   The web browser application is the application running in the client 
   browser, and has several responsibilities in the system.
-
+%
   The first responsibility of this application is to handle the 
   requests received from the server and to render them in the web 
   browser.
-
+%
   The second responsibility is to handle events occuring in the browser, and to 
   send them back to the server, for them to be handled by the X client.
 \end{description}
