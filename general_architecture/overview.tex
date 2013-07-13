@@ -15,22 +15,20 @@ communication pattern is shown in figure~\ref{fig:project-overview}.
   to transfer the requests sent by the X clients to the frontend of the system, 
   and to transfer back the replies and events sent by the frontend to the 
   X clients. 
-%  
-  % This sentence is little complex. You can explain more simply.
-  Another important role of this application is to store as possible 
-  the information held by the client and the frontend in order to, whenever 
-  possible avoid unneeded communication by responding directly without 
-  needing to transfer any information.
+% 
+  Another important role of this application is to cache 
+  information held by the client and the frontend in order to 
+  respond directly to the X clients and avoid unneeded communications
+  with the frontend.
+
 %
-  % Below sentences also may be able to be more simply.
-  % Especially, second sentence includes multiple sentences using ','.
   To illustrate this caching system, let us think about a requests sent by a 
   client to get the background and foreground pixels of a particular 
   subwindow (the root window information being sent on connection). If the 
-  backend server was doing any cache work, the request would have to be 
-  sent to the frontend application, and then to the client web browser, before 
-  getting an answer, which would result in a, depending on the bandwith, 
-  quite long latency for a very basic request.   
+  backend server was not doing any cache work, the request would have to be 
+  sent to the frontend application and then to the client web browser to get 
+  a reply. This would of course increase latency. By using the cache system,
+  the reply can be handled by the backend and is therefore almost instant.
   
 \item[Server frontend]
   One of the roles of this application  is to act as a bridge to
