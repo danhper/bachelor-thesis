@@ -1,0 +1,49 @@
+\section{Scala integration}
+The actor pattern integrates very well with Scala for different reasons that 
+we will briefly discuss about.
+\subsection{Pattern matching}
+Scala allows very extensive pattern matching. As opposed to \lstinline{switch} 
+statements in a lot of imperative languages, in which only a few predefined types 
+can be match, Scala allows, through \lstinline{case class} and \lstinline{case object}
+to match much anything. A \lstinline{case class} is an immutable class that have the 
+necessary features to be matched. A \lstinline{case object} is its singleton version.
+
+This makes message handling when using actor very simple and efficient. 
+To give a short example of it, let think of a chat client which can receive messages 
+when a user connects, disconnects, or when a message is received. 
+The case classes to use could be defined as in~\ref{list:chat-example-def} and the 
+method handling could be implemented as in in~\ref{list:chat-example-impl}.
+%
+\begin{lstlisting}[basicstyle=\footnotesize,caption=Chat example definitions,label=list:chat-example-def,language=scala]
+case class UserConnection(username: String)
+case class UserDisconnection(username: String)
+case class Message(username: String, message: String)
+\end{lstlisting}
+%
+\begin{lstlisting}[basicstyle=\footnotesize,caption=Chat example implementation,label=list:chat-example-impl,language=scala]
+class ChatActor extends Actor {
+  private var users: Set[String] = Map.empty
+  def receive = {
+    case UserConnection(username) => {
+      users += username
+      chatView.putInfo(username + " has connected.")
+    }
+    case UserDisconnection(username) => {
+      users -= username
+      chatView.putInfo(username + " has disconnected.")
+    }
+    case Message(username: String, message: String) => {
+      chatView.putMessage(username, message)
+    }
+  }
+}
+\end{lstlisting}
+%
+This example if of course very minimalist but reflects quite well the simplicity of the 
+model. Furthermore, the akka library integrates remote actors, which can be used to have 
+the class handling a TCP connection. If the server sending the messages is using the same 
+library and the same class definitions, the messages can be passed through TCP only by 
+changing a configuration file.
+%
+\subsection{Domain Specific Language}
+This part is a small details but plays a role in the general source code readability.
