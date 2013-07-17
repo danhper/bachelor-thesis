@@ -1,11 +1,12 @@
 \section{Scala integration}
 The actor pattern integrates very well with Scala for different reasons that 
 we will briefly discuss about.
-\subsection{Pattern matching}
+\subsection{Pattern matching and case classes}
 Scala allows very extensive pattern matching. As opposed to \lstinline{switch} 
 statements in a lot of imperative languages, in which only a few predefined types 
 can be match, Scala allows, through \lstinline{case class} and \lstinline{case object}
-to match much anything. A \lstinline{case class} is an immutable class that have the 
+to match almost anything. 
+A \lstinline{case class} is an immutable class that have the 
 necessary features to be matched. A \lstinline{case object} is its singleton version.
 
 This makes message handling when using actor very simple and efficient. 
@@ -45,5 +46,3 @@ the class handling a TCP connection. If the server sending the messages is using
 library and the same class definitions, the messages can be passed through TCP only by 
 changing a configuration file.
 %
-\subsection{Domain Specific Language}
-This part is a small details but plays a role in the general source code readability.
