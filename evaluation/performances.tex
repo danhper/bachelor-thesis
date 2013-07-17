@@ -1,0 +1,59 @@
+\section{Performances}
+%
+\subsection{Used technologies}
+From a hardware level, the system performance should be good enough. We will 
+here think the data transfer performances as well as the rendering performances.
+%
+\subsubsection{Data transfer and bandwidth}
+%
+Bandwidth has been increasing impressively during the last couple of years. 
+About 10 years ago, $512$kbits/s ADSL was quite common, and the downstream and 
+upstream rate was very limited. 
+
+However, with the improvement of the communication protocols and the 
+spread of fiber-optic communication, these rate has become higher and higher.
+Using fiber-optic communication, a server 
+%
+\subsubsection{Web browser rendering}
+%
+Until HTML4, rendering something else than text in a web browser required the 
+use of some other technologies, such as flash or yet Java applets. 
+
+From HTML5, Canvas has appeared in web browser and bitmap rendering can now 
+be done natively. Furthermore, JavaScript implementations
+are becoming faster and faster, and recent JavaScript implementations 
+are way faster than flash or Java applets\cite{js-vs-as}.
+
+In this system, the main purpose of the X server working is to be able to use
+a Linux distribution in a web browser, mainly for a normal desktop use and 
+not to play 3D games in it. This should hardly require more than 10 frames per second, 
+except maybe for videos. With the current performance of JavaScript and 
+recent processors, such a frame rate should be easy enough to reach, and we 
+therefore think that rendering performances should not be too much of a bottleneck 
+for a main stream usage of the system.
+%
+\subsection{System implementation}
+%
+The system not yet at a very advanced implementation state, but there is however a point that 
+needs to be fixed in order to improve the general performances.
+
+In the actual implementation of the system, the server frontend application takes care of 
+handling the client login, but also acts as a bridge between the backend application and the 
+web browser. That means that all requests and replies pass through this application.
+
+This is bad, and will therefore be fixed in the future releases, for two reasons.
+\begin{itemize}
+\item The requests and replies need to be transferred two times, and therefore have to 
+  be sent over three different channels to go from an X client to the web browser as shown 
+  in figure~\ref{fig:project-overview}.
+\item If several users connect at the same time, the burden of the frontend 
+  application could become too big. This would slow down all the clients.
+\end{itemize}
+This could be greatly improved by having the web browser communicating 
+directly with the backend application after the login phase.
+
+For this improvement, we would simply need to have the frontend application 
+sending the authentication token to the backend application after starting it.
+The web browser application would then been sent the hostname and eventually port 
+to connect to. When connecting to the backend application which would check the 
+received token and then finish setting up the connection.
