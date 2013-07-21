@@ -1,0 +1,18 @@
+\section{RealVNC}
+RealVNC\footnote{\url{http://www.realvnc.com/}} is a remote access software that also 
+allows clients to take control of a remote computer from their web browsers. There are however some major differences with this project.
+
+RealVNC uses the Virtual Networking Computing (VNC) protocol to handle 
+communication between the server and the client.
+
+A big advantage of this method is that an existing implementation of the X server 
+can be used, as the rendering can be done on the server side and the pixmap is passed 
+through from the server to the client.
+
+However, an inconvenient of this approach is that it can use a lot of bandwidth and though 
+some optimization can be done, it remains way higher than a single JSON object used in this
+project.
+
+Another difference with this project is that the user already needs to be logged in 
+to access the remote computer and it can therefore not be used as a login manager, nor 
+can be used efficiently for multiple users access.
